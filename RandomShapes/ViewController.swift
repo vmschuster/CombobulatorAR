@@ -12,7 +12,7 @@ import SceneKit
 import ARKit
 import PlacenoteSDK
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UITableViewDelegate, UITableViewDataSource, PNDelegate, CLLocationManagerDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UITableViewDelegate, UITableViewDataSource, PNDelegate, CLLocationManagerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
   
 
   //UI Elements
@@ -20,7 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   @IBOutlet weak var retrieveObjectView: UIView!
   
   //UI Elements
-  @IBOutlet var objectTable: UITableView!
+  @IBOutlet var itemPicker: UIPickerView!
   @IBOutlet var mapTable: UITableView!
   @IBOutlet var thumbnailView: UIImageView!
   @IBOutlet var statusLabel: UILabel!
@@ -42,11 +42,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   private var thumbnailSelector: LocalizationThumbnailSelector? = nil;
   
   private var maps: [(String, LibPlacenote.MapMetadata)] = [("Sample Map", LibPlacenote.MapMetadata())]
+  private var objects: [(String, LibPlacenote.MapMetadata)] = []
 
   private var showFeatures: Bool = true
   private var locationManager: CLLocationManager!
   private var lastLocation: CLLocation? = nil
   private var mapName: String!
+  
+  var pickerData: [String] = [String]()
   
   
   private var thumbnailHandler: Disposable? = nil
@@ -83,6 +86,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
     //App Related initializations
     shapeManager = ShapeManager(view: sceneView)
+  
     
     //Initialize tableview for the list of maps
     mapTable.delegate = self
@@ -90,6 +94,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     mapTable.allowsSelection = true
     mapTable.isUserInteractionEnabled = true
     mapTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    
+    self.itemPicker.delegate = self
+    self.itemPicker.dataSource = self
 
     //UI Updates
     locationManager = CLLocationManager()
@@ -146,7 +153,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     print ("Just localized, drawing view")
     shapeManager.drawView(parent: sceneView.scene.rootNode) //just localized redraw the shapes
     statusLabel.text = "Map Found!"
-    thumbnailView.isHidden = false
+    thumbnailView.isHidden = true
     tapGestureRecognizer.isEnabled = true
   }
 
@@ -188,7 +195,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   // Start creating a new map
   @IBAction func newMap(_ sender: Any) {
   
-    
     if (!trackingStarted)
     {
       statusLabel.text = "ARKit Tracking Session is not ready yet. Try again"
@@ -208,16 +214,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     mappingView.isHidden = false
     
   }
-  @IBOutlet weak var addToLibrary: UIButton!
-  @IBOutlet weak var ObjectName: UITextField!
   //todo: change this later
 
   // tap handler for adding shapes
     @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
+      
+      if (retrieveObjectView.isHidden == false) {
+        retrieveObjectView.isHidden = true
+        objectSelected(row: itemPicker.selectedRow(inComponent: 1))
+        tapGestureRecognizer?.isEnabled = false
+        return
+      }
+      
       var objectName: String!
       var objectNameField: UITextField?
       let tapLocation = sender.location(in: sceneView)
-
+      let hitTestResults = sceneView.hitTest(tapLocation, types: .featurePoint)
       let alert = UIAlertController(title: "Add New Object",
                                     message: "Name new object",
                                     preferredStyle: UIAlertControllerStyle.alert)
@@ -225,7 +237,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
                                     style: UIAlertActionStyle.default,
                                     handler: { (alert: UIAlertAction!) -> Void in
                                       objectName = String((objectNameField?.text)!)
-                                      self.proceedToAddObject(tapLocation: tapLocation, itemName: objectName)
+                                      self.proceedToAddObject(hitTestResults: hitTestResults, itemName: objectName)
                                     }))
       alert.addAction(UIAlertAction(title: "Cancel Adding Object",
                                     style: UIAlertActionStyle.default,
@@ -238,9 +250,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     
       }
   
-  func proceedToAddObject(tapLocation: CGPoint , itemName: String!){
-    let hitTestResults = sceneView.hitTest(tapLocation, types: .featurePoint)
-    
+  func proceedToAddObject(hitTestResults: [ARHitTestResult], itemName: String!){
     if let result = hitTestResults.first {
       let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
       shapeManager.spawnRandomShape(position: pose.position(), name: itemName)
@@ -248,8 +258,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     
   }
   
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    retrieveObjectView.isHidden = true
+    objectSelected(row: Int(row))
+  }
   
-  @IBAction func saveExistingMap(){
+  func objectSelected(row: Int){
+    print(row)
+    shapeManager.navigateToItem(itemName: pickerData[row])
+  }
+  
+/* @IBAction func saveExistingMap(){
     let alert = UIAlertController(title: "Nice Try", message: "I havent actually gotten this to work due to errors so this actually will execute the cancel call but i'm leaving it here until I fix it. ", preferredStyle: UIAlertControllerStyle.alert)
     alert.addAction(UIAlertAction(title: "Sounds Good Dawg",
                                   style: UIAlertActionStyle.default,
@@ -260,6 +279,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     statusLabel.text = "Saving Map"
     self.exitLoadingSession(self)
   }
+ */
   
   //save map
   @IBAction func saveMap(_ sender: Any) {
@@ -285,6 +305,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     self.present(alert, animated: true, completion: nil)
   }
   
+  // handles saving the map with inputting map name
   func proceedToSave(savedMapName: String){
     mappingView.isHidden = true
     LibPlacenote.instance.saveMap(
@@ -331,20 +352,33 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         }
     )}
   
+  
+  
   @IBAction func retrieveObject(){
     loadObjectTable()
+    tapGestureRecognizer?.isEnabled = true
     retrieveObjectView.isHidden = false
+  }
+  
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+  }
+  
+  // The number of rows of data
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+      return pickerData.count
+  }
+  
+  // The data to return fopr the row and component (column) that's being passed in
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+      return pickerData[row]
   }
   
 //  TODO: this
   func loadObjectTable(){
-    print("cowboys lfg")
-    print("nope we aint gettin this far partner")
-  
-// self.shapemanager.getshapearray is being a PITA so we will proceed next time ok bye
-    for item in self.shapeManager.getShapeArray(){
-      self.objectTable.dequeueReusableCell(withIdentifier: item["shape"]!["name"]!)
-    }
+    let itemNames = shapeManager.getItemNames()
+    self.pickerData = itemNames
+    itemPicker.reloadAllComponents()
   }
   
   // click load map to choose from a list of maps
@@ -531,8 +565,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
     statusLabel.text = status
   }
-
-
+  
+  
   // MARK: - CLLocationManagerDelegate
 
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

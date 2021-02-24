@@ -103,24 +103,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiU-nR-h1U">
-                                        <rect key="frame" x="154" y="160" width="106" height="30"/>
+                                        <rect key="frame" x="250" y="600" width="123" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" systemColor="systemBlueColor"/>
                                         <state key="normal" title="Retrieve Object"/>
                                         <connections>
                                             <action selector="retrieveObject" destination="BV1-FR-VrT" eventType="touchUpInside" id="bDS-JE-NGY"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baR-K1-OXM">
-                                        <rect key="frame" x="273" y="645" width="100" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="9uU-89-spQ"/>
-                                            <constraint firstAttribute="height" constant="50" id="vS2-Vs-cVk"/>
-                                        </constraints>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="saveExistingMap" destination="BV1-FR-VrT" eventType="touchUpInside" id="zSK-uc-Bkl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Llu-in-DB6" userLabel="ExitButton">
@@ -160,10 +149,8 @@
                                 <constraints>
                                     <constraint firstItem="Llu-in-DB6" firstAttribute="leading" secondItem="nN2-GL-VZA" secondAttribute="leading" constant="40" id="0FO-mM-dfx"/>
                                     <constraint firstAttribute="bottom" secondItem="Llu-in-DB6" secondAttribute="bottom" constant="40" id="4fU-9S-Ck3"/>
-                                    <constraint firstAttribute="bottom" secondItem="baR-K1-OXM" secondAttribute="bottom" constant="40" id="6xu-AP-aYt"/>
                                     <constraint firstAttribute="bottom" secondItem="9ae-YN-p0L" secondAttribute="bottom" constant="120" id="NLd-cU-WIh"/>
                                     <constraint firstItem="9ae-YN-p0L" firstAttribute="leading" secondItem="nN2-GL-VZA" secondAttribute="leading" constant="40" id="R8A-uJ-UfS"/>
-                                    <constraint firstAttribute="trailing" secondItem="baR-K1-OXM" secondAttribute="trailing" constant="40" id="eeo-d1-4VQ"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZb-79-zYZ" userLabel="MaplistView">
@@ -229,11 +216,10 @@
                                 <rect key="frame" x="0.0" y="480" width="414" height="265"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u49-AZ-4Zd" userLabel="objectTable">
-                                        <rect key="frame" x="87" y="26" width="240" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </tableView>
+                                    <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cik-hH-9pQ">
+                                        <rect key="frame" x="0.0" y="51" width="414" height="162"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </pickerView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -268,11 +254,11 @@
                     <connections>
                         <outlet property="exitSessionButton" destination="Llu-in-DB6" id="Evb-4v-5Yw"/>
                         <outlet property="initView" destination="KGk-D0-2XN" id="rTq-Cy-TP6"/>
+                        <outlet property="itemPicker" destination="Cik-hH-9pQ" id="QSD-gP-aha"/>
                         <outlet property="loadingView" destination="nN2-GL-VZA" id="ICJ-do-QF3"/>
                         <outlet property="mapListView" destination="oZb-79-zYZ" id="MpF-uM-kJP"/>
                         <outlet property="mapTable" destination="0ka-cC-Twy" id="Wi9-h9-oaJ"/>
                         <outlet property="mappingView" destination="vIw-fs-dU1" id="BxZ-XR-vZ0"/>
-                        <outlet property="objectTable" destination="u49-AZ-4Zd" id="X9K-YD-dbK"/>
                         <outlet property="retrieveObjectView" destination="bvQ-S8-FU1" id="JeO-jh-QfU"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="0Jc-xR-jJ3"/>
                         <outlet property="statusLabel" destination="3Xz-vt-npx" id="wui-wQ-DQj"/>
@@ -296,6 +282,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

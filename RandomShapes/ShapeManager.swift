@@ -54,7 +54,7 @@ class ShapeManager {
   private var shapePositions: [SCNVector3] = []
   private var shapeTypes: [ShapeType] = []
   private var shapeNodes: [SCNNode] = []
-  private var itemName: [String] = []
+  private var itemNames: [String] = []
   
   public var shapesDrawn: Bool! = false
 
@@ -68,11 +68,41 @@ class ShapeManager {
     var shapeArray: [[String: [String: String]]] = []
     if (shapePositions.count > 0) {
       for i in 0...(shapePositions.count-1) {
-        shapeArray.append(["shape": ["style": "\(shapeTypes[i].rawValue)", "x": "\(shapePositions[i].x)",  "y": "\(shapePositions[i].y)",  "z": "\(shapePositions[i].z)", "name": "\(itemName[i])" ]])
+        shapeArray.append(["shape": ["style": "\(shapeTypes[i].rawValue)", "x": "\(shapePositions[i].x)",  "y": "\(shapePositions[i].y)",  "z": "\(shapePositions[i].z)", "name": "\(itemNames[i])" ]])
       }
     }
     return shapeArray
   }
+    
+    func getItemNames() -> [String]{
+        return itemNames
+    }
+    
+    func navigateToItem(itemName: String){
+        let index = itemNames.index(of: itemName)
+        hideAllShapes(index: index!)
+        showShape(index: index!)
+    }
+
+    func hideAllShapes(index: Int){
+        var i = 0
+        while i < shapeNodes.count{
+            if (i != index){
+                hideShape(index: i)
+            }
+            i+=1
+        }
+        
+    }
+    
+    func hideShape(index: Int){
+        shapeNodes[index].isHidden = true
+    }
+    
+    func showShape(index: Int){
+        shapeNodes[index].isHidden = false
+    }
+    
 
   // Load shape array
   func loadShapeArray(shapeArray: [[String: [String: String]]]?) -> Bool {
@@ -90,12 +120,19 @@ class ShapeManager {
       let position: SCNVector3 = SCNVector3(x: Float(x_string)!, y: Float(y_string)!, z: Float(z_string)!)
       let name: String = item["shape"]!["name"]!
       let type: ShapeType = ShapeType(rawValue: Int(item["shape"]!["style"]!)!)!
+    
       shapePositions.append(position)
+      itemNames.append(name)
       shapeTypes.append(type)
         shapeNodes.append(createShape(position: position, type: type, name: name))
       print ("Shape Manager: Retrieved " + String(describing: type) + " type at position" + String (describing: position))
     }
+    for shape in shapeNodes{
+        shape.isHidden = true
+    }
+        
 
+    print(itemNames)
     print ("Shape Manager: retrieved " + String(shapePositions.count) + " shapes")
     return true
   }
@@ -124,6 +161,7 @@ class ShapeManager {
     shapeNodes.removeAll()
     shapePositions.removeAll()
     shapeTypes.removeAll()
+    itemNames.removeAll()
   }
   
   
@@ -140,7 +178,7 @@ class ShapeManager {
     shapePositions.append(position)
     shapeTypes.append(type)
     shapeNodes.append(geometryNode)
-    itemName.append(name)
+    itemNames.append(name)
     
     scnScene.rootNode.addChildNode(geometryNode)
     shapesDrawn = true
