@@ -102,10 +102,13 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nN2-GL-VZA" userLabel="LoadingView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiU-nR-h1U">
-                                        <rect key="frame" x="250" y="600" width="123" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiU-nR-h1U">
+                                        <rect key="frame" x="274" y="646" width="100" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="IG9-iZ-rEW"/>
+                                            <constraint firstAttribute="height" constant="50" id="XRR-bw-5HH"/>
+                                        </constraints>
                                         <color key="tintColor" systemColor="systemBlueColor"/>
                                         <state key="normal" title="Retrieve Object"/>
                                         <connections>
@@ -151,6 +154,8 @@
                                     <constraint firstAttribute="bottom" secondItem="Llu-in-DB6" secondAttribute="bottom" constant="40" id="4fU-9S-Ck3"/>
                                     <constraint firstAttribute="bottom" secondItem="9ae-YN-p0L" secondAttribute="bottom" constant="120" id="NLd-cU-WIh"/>
                                     <constraint firstItem="9ae-YN-p0L" firstAttribute="leading" secondItem="nN2-GL-VZA" secondAttribute="leading" constant="40" id="R8A-uJ-UfS"/>
+                                    <constraint firstAttribute="trailing" secondItem="fiU-nR-h1U" secondAttribute="trailing" constant="40" id="Yac-3T-6Qa"/>
+                                    <constraint firstAttribute="bottom" secondItem="fiU-nR-h1U" secondAttribute="bottom" constant="40" id="qsx-w6-TYr"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZb-79-zYZ" userLabel="MaplistView">

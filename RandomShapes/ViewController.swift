@@ -374,7 +374,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
       return pickerData[row]
   }
   
-//  TODO: this
+  // loads selectable objects for the picker table
   func loadObjectTable(){
     let itemNames = shapeManager.getItemNames()
     self.pickerData = itemNames
