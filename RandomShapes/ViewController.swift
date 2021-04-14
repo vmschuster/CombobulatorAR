@@ -267,19 +267,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     print(row)
     shapeManager.navigateToItem(itemName: pickerData[row])
   }
-  
-/* @IBAction func saveExistingMap(){
-    let alert = UIAlertController(title: "Nice Try", message: "I havent actually gotten this to work due to errors so this actually will execute the cancel call but i'm leaving it here until I fix it. ", preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "Sounds Good Dawg",
-                                  style: UIAlertActionStyle.default,
-                                  handler: nil ))
-    self.present(alert, animated: true, completion: nil)
-    
-    tapGestureRecognizer?.isEnabled = false
-    statusLabel.text = "Saving Map"
-    self.exitLoadingSession(self)
-  }
- */
+
   
   //save map
   @IBAction func saveMap(_ sender: Any) {
