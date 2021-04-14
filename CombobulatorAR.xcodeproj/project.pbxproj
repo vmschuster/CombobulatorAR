@@ -22,7 +22,7 @@
 		2FEF50352E6EFE30A5DCE30A /* Pods-RandomShapes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RandomShapes.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-RandomShapes/Pods-RandomShapes.debug.xcconfig"; sourceTree = "<group>"; };
 		4CA93BBEBF4A17C8B4AD9135 /* Pods-RandomShapes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RandomShapes.release.xcconfig"; path = "../Pods/Target Support Files/Pods-RandomShapes/Pods-RandomShapes.release.xcconfig"; sourceTree = "<group>"; };
 		8035B91185063A80811D9DA8 /* Pods_RandomShapes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RandomShapes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A28C795F202A46F40052F3FB /* RandomShapes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomShapes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A28C795F202A46F40052F3FB /* CombobulatorAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CombobulatorAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28C7962202A46F40052F3FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A28C7964202A46F40052F3FB /* ViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		A28C7967202A46F40052F3FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		A28C7960202A46F40052F3FB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A28C795F202A46F40052F3FB /* RandomShapes.app */,
+				A28C795F202A46F40052F3FB /* CombobulatorAR.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,9 +100,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A28C795E202A46F40052F3FB /* RandomShapes */ = {
+		A28C795E202A46F40052F3FB /* CombobulatorAR */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A28C7987202A46F40052F3FB /* Build configuration list for PBXNativeTarget "RandomShapes" */;
+			buildConfigurationList = A28C7987202A46F40052F3FB /* Build configuration list for PBXNativeTarget "CombobulatorAR" */;
 			buildPhases = (
 				0C372D49EFD197760EAB8441 /* [CP] Check Pods Manifest.lock */,
 				A28C795B202A46F40052F3FB /* Sources */,
@@ -114,9 +114,9 @@
 			);
 			dependencies = (
 			);
-			name = RandomShapes;
+			name = CombobulatorAR;
 			productName = PlacenoteSDKExample;
-			productReference = A28C795F202A46F40052F3FB /* RandomShapes.app */;
+			productReference = A28C795F202A46F40052F3FB /* CombobulatorAR.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -134,7 +134,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A28C795A202A46F40052F3FB /* Build configuration list for PBXProject "RandomShapes" */;
+			buildConfigurationList = A28C795A202A46F40052F3FB /* Build configuration list for PBXProject "CombobulatorAR" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -147,7 +147,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A28C795E202A46F40052F3FB /* RandomShapes */,
+				A28C795E202A46F40052F3FB /* CombobulatorAR */,
 			);
 		};
 /* End PBXProject section */
@@ -403,7 +403,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A28C795A202A46F40052F3FB /* Build configuration list for PBXProject "RandomShapes" */ = {
+		A28C795A202A46F40052F3FB /* Build configuration list for PBXProject "CombobulatorAR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A28C7985202A46F40052F3FB /* Debug */,
@@ -412,7 +412,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A28C7987202A46F40052F3FB /* Build configuration list for PBXNativeTarget "RandomShapes" */ = {
+		A28C7987202A46F40052F3FB /* Build configuration list for PBXNativeTarget "CombobulatorAR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A28C7988202A46F40052F3FB /* Debug */,

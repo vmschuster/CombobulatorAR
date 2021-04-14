@@ -17,7 +17,7 @@
                BlueprintIdentifier = "A28C795E202A46F40052F3FB"
                BuildableName = "RandomShapes.app"
                BlueprintName = "RandomShapes"
-               ReferencedContainer = "container:RandomShapes.xcodeproj">
+               ReferencedContainer = "container:2115-Combobulator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,7 +33,7 @@
             BlueprintIdentifier = "A28C795E202A46F40052F3FB"
             BuildableName = "RandomShapes.app"
             BlueprintName = "RandomShapes"
-            ReferencedContainer = "container:RandomShapes.xcodeproj">
+            ReferencedContainer = "container:2115-Combobulator.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -56,7 +56,7 @@
             BlueprintIdentifier = "A28C795E202A46F40052F3FB"
             BuildableName = "RandomShapes.app"
             BlueprintName = "RandomShapes"
-            ReferencedContainer = "container:RandomShapes.xcodeproj">
+            ReferencedContainer = "container:2115-Combobulator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -73,7 +73,7 @@
             BlueprintIdentifier = "A28C795E202A46F40052F3FB"
             BuildableName = "RandomShapes.app"
             BlueprintName = "RandomShapes"
-            ReferencedContainer = "container:RandomShapes.xcodeproj">
+            ReferencedContainer = "container:2115-Combobulator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
